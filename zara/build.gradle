@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.12'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// 1. Spring Web (Para crear el @RestController y exponer la API)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// 2. Persistencia (Para la base de datos y los repositorios)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+
+
+	// 4. Testing (Para ejecutar los test de integración con MockMvc)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
